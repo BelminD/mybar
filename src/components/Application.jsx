@@ -5,7 +5,7 @@ import { styled, React  } from "uebersicht";
 const AppDiv = styled('div')`
 position: relative;
 display: inline-block;
-font-family: 'Source Code Pro', monospace;
+font-family: 'Helvetica Neue', monospace;
 margin-top: 2px;
 min-width: ${config.Application.paddedWidth};
 flex: 0;

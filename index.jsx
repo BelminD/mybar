@@ -7,9 +7,11 @@ import { renderOrder, config } from './src/config'
 import {
 	Application,
 	Battery,
+	Logo,
 	Spotify,
 	Time,
-	Wifi
+	Wifi,
+	Workspace
 } from './src/components/Components'
 
 
@@ -24,8 +26,8 @@ export const className = `
 	height: 26px;
 	padding-top: 1px;
 	background-color: ${config.Root.backgroundColor};
-	@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
-	font-family: 'Source Code Pro', monospace;
+	background-color: rgba(0, 0, 0, 0.4);
+	font-family: 'Helvetica Neue', monospace;
 	color: white;
 	whitespace: nowrap;
 `
@@ -44,18 +46,21 @@ export const render = ({ output, error }) => {
 	if(error !== undefined) {
 		console.error('Error in MyBar Widget:\n', error);
 	}
-	
+
 	// === Add Components Based on Render Order === //
 	let components = [];
 	let index = 0;
 	for(let item of renderOrder) {
-		
+
 		switch (item) {
 			case 'A':
 				components.push(<Application key={index} output={output} />);
 				break;
 			case 'B':
 				components.push(<Battery key={index} output={output} />);
+				break;
+			case 'L':
+				components.push(<Logo/>);
 				break;
 			case 'T':
 			components.push(<Time key={index} />)
@@ -119,11 +124,11 @@ WIFI_STATUS=$(if [ -n "$(/System/Library/PrivateFrameworks/Apple80211.framework/
 # Uses <JSONQuote> to get around weird quote escape error
 SPOTIFY=$(
 	osascript -l JavaScript <<EOD | sed -e 's/<JSONQuote>/\"/g'
-	
+
 	if (Application('Spotify').running()) {
 		var spotify = Application('Spotify')
 		if (spotify.currentTrack() !== null) {
-			
+
 		var song = spotify.currentTrack().name().replace(/\"/g, "\\\'")
 		var artist = spotify.currentTrack().artist().replace(/\"/g, "\\\'")
 		var artwork = spotify.currentTrack().artworkUrl()
@@ -132,7 +137,7 @@ SPOTIFY=$(
 		var state = spotify.playerState()
 		var shuffle = spotify.shuffling()
 		var repeat = spotify.repeating()
-		
+
 		"{<JSONQuote>song<JSONQuote>: <JSONQuote>" + song + "<JSONQuote>, <JSONQuote>artist<JSONQuote>: <JSONQuote>" + artist + "<JSONQuote>, <JSONQuote>artwork<JSONQuote>: <JSONQuote>" + artwork + "<JSONQuote>, <JSONQuote>duration<JSONQuote>: <JSONQuote>" + duration + "<JSONQuote>, <JSONQuote>position<JSONQuote>: <JSONQuote>" + position + "<JSONQuote>, <JSONQuote>state<JSONQuote>: <JSONQuote>" + state + "<JSONQuote>, <JSONQuote>repeat<JSONQuote>: <JSONQuote>" + repeat + "<JSONQuote>, <JSONQuote>shuffle<JSONQuote>: <JSONQuote>" + shuffle + "<JSONQuote>}"
 		} else {
 			"{}"

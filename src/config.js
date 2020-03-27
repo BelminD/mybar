@@ -14,7 +14,8 @@ import * as Settings from "./enums";
 //   * '-': Flexing empty space
 //   * '|': Fixed empty space
 // Note: All commands are case-sensitive
-export const renderOrder = 'BW-S-T';
+export const renderOrder = 'L|A-S|W|T|B';
+// export const renderOrder = 'BW-S-T';
 
 // === Widget Config === //
 // The following object allows for basic control without
@@ -26,26 +27,32 @@ export const config = {
         // 'top' or 'bottom' only.
         position: Settings.Root.Position.TOP,
         // The color of the bar itself
-        backgroundColor: '#33364f'
+        backgroundColor: '#000', // '#33364f'
     },
     // === Command: 'A' === //
     Application: {
         // Allows for the text to dynamically change
         // without shifting all the widgets a ton.
-        paddedWidth: '100px'
+        paddedWidth: '30px'
+    },
+    Logo: {
+        // Allows for the text to dynamically change
+        // without shifting all the widgets a ton.
+        // paddedWidth: '20px'
     },
     // === Command: 'B' === //
     Battery: {
         // The tick icon
-        tick: '░',
+        tick: '.',
+        // tick: '█',
         // Controls how much of a percent each tick in
         // the battery is worth (ex: 0.1 -> 10 ticks)
-        tickValue: 0.1,
+        tickValue: 0.45,
         // Minimum battery level before displaying the dying alert.
         dyingThreshold: 0.15,
         // The colors to display at any given level.
         // Each step determines a color for all levels below
-        // and including the given one. 
+        // and including the given one.
         // Values are [<Level>, <Color>]
         colorSteps: Settings.BatteryStyle.Colors.step([
             [0.25, Settings.Colors.RED],
@@ -55,9 +62,9 @@ export const config = {
         // The opacity of the ticks that are empty
         unfilledOpacity: 0.15,
         // Show an alert when the computer is dying
-        showDying: true,
+        // showDying: true,
         // Show an alert when the computer is charging
-        showCharging: true,
+        // showCharging: true,
         // Set the charging icon. This can be any string or character but
         // it is recommended to use one of the built-in ones because they
         // are cool. May I recommend Settings.BatteryStyle.Icon.Charging.LENNY?
@@ -89,29 +96,29 @@ export const config = {
         // Note: All commands are case-sensitive
         displayOrder: "IS-AT",
         // The color of the Song text
-        displaySong: "#fff",
+        displaySong: "#e90",
         // Removes all trailing song info after the '('
-        shortenSong: true,
+        shortenSong: false,
         // The color of the Artist text
-        displayArtist: "#fff",
+        displayArtist: "#fe8",
         // Determines whether and how to display the Album Artwork
         displayArtwork: Settings.SpotifyStyle.ArtDisplay.SHOW,
         // Determines whether and how to display the Time Left
-        displayTime: Settings.SpotifyStyle.TimeDisplay.ICON,
+        displayTime: Settings.SpotifyStyle.TimeDisplay.TEXT,
         // Inverts the time display like below:
         //   * TEXT: 1:23/5:00 -> -3:37/5:00
         //   * ICON: Fill Spinner -> Empty Spinner
-        invertTime: true,
+        invertTime: false,
         // The color of the Time Left icon fill
-        timeFill: Settings.Colors.FG,
+        timeFill: '#f8b',
         // The color of the Time Left text
-        timeColor: "#8888",
+        timeColor: "white",
         // The color of the Shuffle icon
         displayShuffle: "#fff",
         // The color of the Repeat icon
         displayRepeat: "#fff",
         // If true -> displays 'Nothing Playing' if Spotify is closed
-        displayDespiteNothing: true,
+        displayDespiteNothing: false,
         // Padding between components
         padding: "3px",
     },
@@ -120,7 +127,6 @@ export const config = {
         // How much the spacer spaces
         padding: '10px'
     },
-    // === Command: 'T' === //
     Time: {
         // This controls the display order for the Time widget.
         // The string contains single character commands to display
@@ -135,9 +141,9 @@ export const config = {
         //    * 'S'|'s': Seconds [Default|0-Padded]
         //    * '?': Displays 'AM' or 'PM'
         //    * any: Any other character can be used as regular text
-        displayOrder: '[w][m][D] H:p:s ?',
+        displayOrder: 'w m D H:p ? ',
         // Map a color to each command
-        colors: {'w': '#f99', 'm': '#b9f', 'D': '#9f7'}
+        colors: {'w': '#fff', 'm': '#fff', 'D': '#fff', 'H':'#fff', 'p':'#fff', 's':'#fff', '?':'#fff'}
     },
     // === Command: 'W' === //
     Wifi: {
@@ -148,7 +154,7 @@ export const config = {
         // This is simply an array of color values.
         // If there are fewer colors than bars, then the
         // last color in the array is used for the remaining.
-        filledColors: Settings.WifiStyle.Color.DEFAULT,
+        filledColors: Settings.WifiStyle.Color.GREEN,
         // Set the color of the empty wifi bars
         emptyBarColor: "#fff5",
         // Determines whether and where to display the SSID

@@ -5,8 +5,9 @@ import { styled, React  } from "uebersicht";
 const BatteryDiv = styled('div')`
 position: relative;
 display: inline-block;
-font-family: 'Source Code Pro', monospace;
+font-family: 'Helvetica Neue', monospace;
 margin-top: 1px;
+margin-right:15px;
 flex: 0;
 `
 
@@ -21,7 +22,7 @@ export default class Battery extends React.Component {
         // === Parse Output === //
         let charge = parseOutput(output, 'charge');
         let isPluggedIn = parseOutput(output, 'plugged') === 'true';
-        
+
         // === Get Charge === //
         let chargeVal = parseInt(charge);
         // Limit to 0-100
@@ -41,7 +42,7 @@ export default class Battery extends React.Component {
             } else {
                 color = Colors.GREEN;
             }
-        } else if (cfg.colorSteps !== BatteryStyle.Colors.NONE) {		
+        } else if (cfg.colorSteps !== BatteryStyle.Colors.NONE) {
             color = cfg.colorSteps(chargeVal);
         }
 
@@ -69,13 +70,13 @@ export default class Battery extends React.Component {
                 shouldAnimate = cfg.animationInterval;
             }
         }
-        
+
 
         let BatteryAlert = styled('div')`
         position: absolute;
         top: 35%;
         left: 50%;
-        
+
         text-align: center;
         font-size: 90%;
         font-weight: bolder;
@@ -87,10 +88,10 @@ export default class Battery extends React.Component {
 
         return (
             <BatteryDiv style={{letterSpacing: '2px'}}>
-                <span>[</span>
+                {/* <span>[</span> */}
                 <span style={batteryFillColor}>{cfg.tick.repeat(ticksToFill)}</span>
                 <span style={{opacity: cfg.unfilledOpacity, fontSize: '90%'}}>{cfg.tick.repeat(totalTicks - ticksToFill)}</span>
-                <span>]</span>
+                {/* <span>]</span> */}
                 <BatteryAlert>{alertText}</BatteryAlert>
             </BatteryDiv>
         )
