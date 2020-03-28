@@ -55,8 +55,8 @@ export const config = {
         // and including the given one.
         // Values are [<Level>, <Color>]
         colorSteps: Settings.BatteryStyle.Colors.step([
-            [0.25, Settings.Colors.RED],
-            [0.5, Settings.Colors.YELLOW],
+            [0.1, Settings.Colors.RED],
+            [0.4, Settings.Colors.YELLOW],
             [1.0, Settings.Colors.GREEN],
         ]),
         // The opacity of the ticks that are empty

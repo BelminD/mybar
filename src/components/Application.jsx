@@ -6,7 +6,8 @@ const AppDiv = styled('div')`
 position: relative;
 display: inline-block;
 font-family: 'Helvetica Neue', monospace;
-margin-top: 2px;
+margin-top: 0px;
+font-weight: 700;
 min-width: ${config.Application.paddedWidth};
 flex: 0;
 `
